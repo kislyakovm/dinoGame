@@ -6,11 +6,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import java.util.Map;
+import java.util.Random;
+
 public class DinoGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture imgBackground, imgDino, imgStone;
 	int stonePositionX, dinoPositionY;
 	boolean dinoJump, dinoFall;
+	int speed;
 	
 	@Override
 	public void create () {
@@ -18,6 +22,7 @@ public class DinoGame extends ApplicationAdapter {
 		imgBackground = new Texture("dino.jpg");
 		imgDino = new Texture("dino.png");
 		imgStone = new Texture("rock.png");
+		speed = Gdx.graphics.getWidth() / 100;
 
 		stonePositionX = Gdx.graphics.getWidth() - Gdx.graphics.getWidth() / 40;
 		dinoPositionY = 0;
@@ -73,8 +78,9 @@ public class DinoGame extends ApplicationAdapter {
 	private void moveOfStone() {
 		if (stonePositionX < - Gdx.graphics.getWidth() / 5) {
 			stonePositionX = Gdx.graphics.getWidth();
+			speed = Gdx.graphics.getWidth() / (int)(Math.random() * 40 + 80);
 		}
-		stonePositionX = stonePositionX - Gdx.graphics.getWidth() / 100;
+		stonePositionX = stonePositionX - speed;
 	}
 
 	@Override
